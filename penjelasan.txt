@@ -1,0 +1,145 @@
+---------- HTMLCollection & nodeList ----------
+
+HTMLCollection  ===> kumpulan dari beberapa element HTML
+nodeList        ===> kumpulan dari beberapa element beserta atribut
+
+---------- DOM Selection Method ----------
+
+    di depannya harus ada node root nya(document) dan disimpan didalam variable. 
+    contoh : document.getElementById()
+
+- getElementById() ===> mengambil dari id (menghasilkan element)
+- getElementsByTagName() ===> berdasarkan tag name (menghasilkan HTMLCollection)
+- getElementsByClassName() ===> berdasarkan class (menghasilkan HTMLCollection)
+- querySelector() ===> untuk mencari element berdasarkan selector (menghasilkan element)
+- querySelectorAll() ===> untuk mencari element berdasarkan selector (menghasilkan nodeList)
+
+- semua yang menghasilkan HTMLCollection dan nodeList adalah array. jadi, bila hanya ingin mengambil
+    1 element saja bisa ditambah [index] dibelakangnya
+    contoh :
+        + const judul = document.getElementsByTagName('judul')[0];
+
+---------- var, let, const ----------
+
+- var   => menganut function scope (tidak akan error bila terjadi pengambilan sebelum 
+            mendeklarasikan variable).
+            + contoh :
+                console.log(i);
+                var i = 10;
+                // ini akan menghasikan nilai undefined
+- let   => menganut block scope (sebaliknya dari var. akan menghasilkan error bila dilakukan
+            pemanggilan seperti diatas)
+
+- const => untuk meminimalisir perubahan state atau sebuah variable yang tidak dapat diubah
+            nilai 'object' nya.
+            + contoh :
+                const a = 20;
+                a = 15; // ini akan menghasikan nilai error
+            kecuali, merubah sesuatu yang bukan objectnya. misalnya :
+                const contohObject = {
+                    nama : 'angga',
+                    umur : 18
+                };
+                contohObject.nama = 'sandi'; // ini tidak akan error
+            begitu juga dengan array. misal :
+                const contohArray = [2,3,4];
+                contohArray.push(); // ini juga tidak akan error
+
+- tips :
+    + mengubah node root untuk membatasi jangkauan.
+        * contoh :
+            const sectionB = document.getElementById('b');
+            const p4 = sectionB.querySelector('p');
+    + bila mengambil body / html, tidak perlu menulis getElementBy.... . cukup dengan document.body.<apa yang akan dilakukan>
+        * contoh :
+            document.body.classList.toggle('biru-muda');
+
+---------- DOM Manipulation Method ----------
+
+- Manipulation element
+    + element.innerHTML = ''        ==> merubah isi dari sebuah tag
+    + element.style.<property> = '' ==> merubah style / css dari sebuah element
+    + element.setAttribute()        ==> untuk memanipulasi atribut dari sebuah element
+    + element.getAttribute()        ==> untuk mengambil atribut
+    + element.removeAttribute()     ==> menghapus atribut
+    + element.className = ''        ==> set nama kelas 
+    + element.classList.<property>()   ==> memanipulasi class
+        * add() ==> menambah
+        * remove() ==> menghapus
+        * toggle() ==> kalo belum punya (+), kalo udah ada (-)
+        * item() ==> untuk mengambil nama class
+        * contains() ==> untuk mengecek apakah element tsb mempunyai class yang ada di parameter
+        * replace() ==> mengganti nama class
+    + dll.
+- Manipulasi Node
+    yang lama lebih efektif. karena yang baru masih sangat baru. sehingga belum semua browser support
+    * yang lama
+        + document.createElement()  ==> membuat element baru
+        + document.createTextNode() ==> membuat teks baru
+        + node.appendChild()        ==> simpan diakhir untuk sebuah element parent
+        + node.insertBefore()       ==> simpan sebelum 
+        + parentNode.removeChild()  ==> menghapus element
+        + parentNode.replaceChild() ==> mengganti element
+        + dll.
+    * yang baru
+        + parentNode.append()       ==> simpan diakhir
+        + parentNode.prepend()      ==> simpan diawal
+        + childNode.before()        ==> simpan sebelum
+        + childNode.after()         ==> simpan setelah
+        + childNode.remove()        ==> menghapus element
+        + childNode.replaceWith()   ==> mengganti element
+
+- tips :
+    <nama_img>.src = <isi dengan link gambarnya>
+    
+---------- DOM Events ----------
+
+Events(Kejadian) bisa dilakukan oleh user (mouse event, keyboard event, dll), ataupun dilakukan 
+secara otomatis oleh API (animasi selesai dijalankan, halaman selesai di load, dll).
+
+bisa dengan 2 cara, yaitu :
+    - Event Handler
+        + inline HTML attribute
+        + element method
+    - addEventListener() ===> yang lebih baru dari yang diatas
+
+- event handler 
+    + contoh :
+        * onclick()
+        * onchange()
+
+- addEventListener()
+    memiliki 2 parameter, yaitu ((event nya apa), (yang akan dilakukannya apa))
+    daftar event :
+        + Mouse Event : click, dblclick, mouseover, mouseenter, mouseup, wheel
+        + Keyboard Event : keydown, keypress, keyup
+        + view event : resize, scroll
+        + form event : reset, submit
+
+- perbedaan antara event handler dengan addEventListener() adalah :
+    + event handler bila dilakukan lebih dari 1x suatu aksi yang sama,
+        maka yang terakhir akan menimpa aksi yang sebelumnya
+    + addEventListener() mau dilakukan beberapa kali pun, tidak akan menimpa yang sebelumnya 
+
+- .preventDefault(); // mencegah aksi default dari sebuah element (dibelakang titik)
+    contoh ada di line 220 script.js
+
+- .stopPropagation(); // mencegah aksi event bubling (yaitu aksi yang ada di parent nya)
+    contoh ada di line 222
+
+---------- DOM Traversal (penelusuran DOM) ----------
+
++ parent == orang tua, sibling == saudara kandung
+
++ terdapat beberapa macam :
+    - parentNode                ==> (menghasilkan node)
+    - parentElement             ==> (menghasilkan element)
+    - nextSibling               ==> (menghasilkan node)
+    - nextElementSibling        ==> (menghasilkan element)
+    - previousSibling           ==> (menghasilkan node)
+    - previousElementSibling    ==> (menghasilkan element)
+
++ contoh :
+    const nama = document.getElementsByClassName('nama')[0];
+    console.log(nama.nextElementSibling.nextElementSibling);
+
