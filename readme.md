@@ -1,6 +1,6 @@
----------------- TUTORIAL DOM JAVASCRIPT ----------------
-------------------------- selesai -----------------------
-
-Dibuat Oleh : Anggara
-Sumber : Channel YT Web Programming UNPAS
-Diupload pada : 9 Oktober 2021
+--------------- TUTORIAL DOM JAVASCRIPT ---------------<br>
+<br>
+Dibuat Oleh   : Anggara <br>
+Sumber        : Channel YT Web Programming UNPAS <br>
+Diupload pada : 9 Oktober 2021 <br>
+Status        : Selesai
